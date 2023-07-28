@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>z-index 실습</title>
+    <style>
+        .container {
+            /* background-color: aqua; */
+            position: relative;
+            width: 500px;
+            height: 300px;
+        }
+        img {
+            width: 450px;
+            position: absolute;
+            bottom: 0;
+            z-index: 9;
+        }
+        .circle {
+            width: 110px;
+            height: 110px;
+            border-radius: 100%;
+            background-color: black;
+        }
+        .a1 {
+            position: absolute;
+            background-color: rgb(0, 0, 227);
+            right: 350px;
+            bottom: 140px;
+
+        }
+        .a2 {
+            position: absolute;
+            background-color: rgb(0, 0, 181);
+            right: 270px;
+            bottom: 90px;
+            z-index: 6;
+        }
+        .a3 {
+            position: absolute;
+            background-color: darkblue;
+            right: 230px;
+            bottom: 40px;
+            z-index: 7;
+        }
+        .a4 {
+            position: absolute;
+            background-color: lightblue;
+            right: 170px;
+            bottom: 40px;
+            z-index: 8;
+        }
+        .a5 {
+            position: absolute;
+            background-color: rgb(38, 113, 218);
+            right: 100px;
+            bottom: 40px;
+            z-index: 10;
+        }
+        .eye1 {
+            position: absolute;
+            background-color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 100%;
+            left: 60px;
+            top: 70px;
+            z-index: 4;
+        }
+        .eye2 {
+            position: absolute;
+            background-color: black;
+            width: 25px;
+            height: 25px;
+            border-radius: 100%;
+            left: 60px;
+            top: 78px;
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="public/img/pngwing.com.png">
+        <div class="circle a1"></div>
+        <div class="circle a2"></div>
+        <div class="circle a3"></div>
+        <div class="circle a4"></div>
+        <div class="circle a5"></div>
+        <div class="eye1"></div>
+        <div class="eye2"></div>
+    </div>
+</body>
+</html>

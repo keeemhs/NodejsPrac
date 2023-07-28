@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>activity1</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <style>
+        div {
+            width: auto;
+            height: 100%;
+        }
+        .picture {
+            width: 200px;
+            height: 200px;
+        }
+        .picture > img {
+            width: 200px;
+            height: 200px;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="picture">
+        <img src="public/img/apple.png" />
+    </div>
+
+    <div class="button1">
+        <button onclick="changeJpg(0)" type="button" name="apple" id="apple">사과</button>
+        <button onclick="changeJpg(1)" type="button" name="banana" id="banana">바나나</button>
+        <button onclick="changeJpg(2)" type="button" name="grape" id="grape">포도</button>
+        <button onclick="changeJpg(3)" type="button" name="peach" id="peach">복숭아</button>    
+    </div>
+
+    <script>
+        function changeJpg(idx) { // 배열 삽입
+            var arr = ["public/img/apple.png", "public/img/banana.png", "public/img/grape.png", "public/img/peach.png"]
+
+            $("img").attr("src", arr[idx])
+        }
+    </script>
+</body>
+</html>
