@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function changered() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function() {
+                    document.body.style.backgroundColor = 'red';
+                    resolve();
+                }, 1000)
+            });
+        };
+        function changeorange() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function() {
+                    document.body.style.backgroundColor = 'orange';
+                    resolve();
+                }, 1000)
+            });
+        };
+        function changeyellow() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function() {
+                    document.body.style.backgroundColor = 'yellow';
+                    resolve();
+                }, 1000)
+            });
+        };
+        function changegreen() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function() {
+                    document.body.style.backgroundColor = 'green';
+                    resolve();
+                }, 1000)
+            });
+        };
+        function changeblue() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function() {
+                    document.body.style.backgroundColor = 'blue';
+                    resolve();
+                }, 1000)
+            });
+        };
+        changered()
+            .then(function() {
+                return changeorange();
+            })
+            .then(function() {
+                return changeyellow();
+            })
+            .then(function() {
+                return changegreen();
+            })
+            .then(function() {
+                return changeblue();
+            })
+    </script>
+</body>
+</html>
