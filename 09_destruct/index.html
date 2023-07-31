@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 배열구조 부분
+        /*
+        let lists = ['apple', 'grape'];
+        [item1, item2, item3 = 'peach'] = lists;
+
+        console.log("item1 : ", item1);
+        console.log("item2 : ", item2);
+        console.log("item3 : ", item3);
+
+        let x = 1, y = 3;
+        [x, y] = [y, x];
+        console.log(x, y);
+        */
+
+        // 객체
+        /*
+        let obj = {key1: 'one', key2: 'two'};
+        let { key1: newKey1, key2, key3 = 'three'} = obj;
+        console.log("key1 : ", key1);
+        console.log("newKey1 : ", newKey1);
+        console.log("key2 : ", key2);
+        console.log("key3 : ", key3);
+        */
+
+        // spread 연산자
+
+        const a = [1, 2, 3];
+        const b = [4, 5];
+        const spread = [...a, ...b];
+        console.log(spread);
+
+        const c = [..."hello"];
+        console.log(c);
+    </script>
+</body>
+</html>
