@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <title>Document</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            fieldset {
+                width: 300px;
+            }
+        </style>
+    </head>
+    <body>
+        <form name="register">
+            <label for="name">이름</label>
+            <input type="text" id="name" />
+            <br />
+            <fieldset>
+                <legend>성별</legend>
+                <input type="radio" name="gender" value="남자" />남자
+                <input type="radio" name="gender" value="여자" />여자
+            </fieldset>
+            <br />
+            <fieldset>
+                <legend>생년월일</legend>
+                <select name="year" id="year">
+                    <option>년</option>
+                </select>
+                년
+                <select name="month" id="month">
+                    <option>월</option>
+                </select>
+                월
+                <select name="day" id="day">
+                    <option>일</option>
+                </select>
+                일
+            </fieldset>
+            <br />
+            <fieldset>
+                <legend>관심사</legend>
+                <input type="checkbox" name="hobby" value="여행" />여행
+                <input type="checkbox" name="hobby" value="패션" />패션
+                <input type="checkbox" name="hobby" value="음식" />음식
+            </fieldset>
+            <br />
+            <button type="button" onclick="axiosGet()">회원가입</button><br />
+        </form>
+        <div class="result"></div>
+
+
+
+        <script>
+            $(document).ready(
+                function () {
+                    for (var i = 2021; i > 1920; i--) {
+                        $('#year').append('<option name="year" value="' + i + '">' + i + '</option>');
+                    }
+                    for (var i = 1; i < 13; i++) {
+                        $('#month').append('<option name="month" value="' + i + '">' + i + '</option>');
+                    }
+                    for (var i = 1; i < 32; i++) {
+                        $('#day').append('<option name="day" value="' + i + '">' + i + '</option>');
+                    }
+                }
+            );
+        </script>
+        <script>
+            const resultBox = document.querySelector('.result');
+            function axiosGet() {
+                console.log('axios get');
+                const form = document.forms['register'];
+                const hobbies = Array.from(form.querySelectorAll('input[name="hobby"]:checked')).map(input => input.value);
+
+                const data = {
+                    name: form.name.value,
+                    gender: form.gender.value,
+                    year: form.year.value,
+                    month: form.month.value,
+                    day: form.day.value,
+                    hobby: hobbies
+                };
+                axios({
+                    method: 'GET',
+                    url: 'axios',
+                    params: data,
+                }).then((res) => {
+                    console.log('res', res);
+                    resultBox.textContent = `GET /axios 요청 완료! ${res.data.name}님은 ${res.data.gender}입니다. \n 생일은 ${res.data.year}년 ${res.data.month}월 ${res.data.day}일 입니다. \n 관심사는 ${res.data.hobby}이네요~`;
+                    resultBox.style.color = 'lime';
+                });
+            }
+        </script>
+    </body>
+</html>
