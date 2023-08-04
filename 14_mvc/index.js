@@ -44,7 +44,11 @@ app.get('/comments', (req, res) => {
 });
 //GET /comment/:id
 app.get('/comment/:id', (req, res) => {
-    
+    // console.log(req.params);
+    // console.log(req.params.id);
+    const commentId = req.params.id;
+    console.log(comments[commentId - 1]);
+    res.render('comment', {commentInfo: comments[commentId - 1] });
 });
 
 app.listen(PORT, () => {
