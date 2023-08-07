@@ -33,7 +33,11 @@ app.get('/', (req, res) => {
 });
 // GET /visitor 방명록 전체 보이기
 app.get('/visitor', (req, res) => {
-    res.render('visitor');
+    const query = 'SELECT * FROM visitor';
+    conn.query(query, (err, rows) => {
+        console.log(rows);
+        res.render('visitor', {data: rows});
+    })
 });
 // GET /visitor/get 방명록 하나 조회
 app.get('/visitor/get', (req, res) => {
@@ -41,7 +45,11 @@ app.get('/visitor/get', (req, res) => {
 });
 // POST /visitor/write 방명록 하나 생성
 app.post('/visitor/write', (req, res) => {
-    res.send('방명록 하나 생성');
+    const query = `INSERT INTO visitor (name, comment) VALUES ('${req.body.name}', '${req.body.comment}')`;
+    conn.query(query, (err, rows) => {
+        console.log('rows', rows);
+        res.send({ id: rows.insertId, name: req.body.name, comment: req.body.comment });
+    });
 });
 // PATCH /visitor/edit 방명록 하나 수정
 app.patch('/visitor/edit', (req, res) => {
