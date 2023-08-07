@@ -50,6 +50,7 @@ app.get('/comment/:id', (req, res) => {
     console.log(comments[commentId - 1]);
     res.render('comment', { commentInfo: comments[commentId - 1] });
 });
+// ***맨 마지막 선언***
 app.get('*', (req, res) => {
     res.render('404');
 })
