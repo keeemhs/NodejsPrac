@@ -8,6 +8,6 @@ exports.result = (req, res) => {
     }
 };
 
-exports.aaa = (req, res) => {
+exports.main = (req, res) => {
     res.render('activity1');
 };

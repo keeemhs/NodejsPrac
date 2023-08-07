@@ -4,7 +4,6 @@ const controller = require('../controller/AComment');
 
 router.post('/axios', controller.result);
 
-//router
-router.get('/', controller.aaa);
+router.get('/', controller.main);
 
 module.exports = router;
