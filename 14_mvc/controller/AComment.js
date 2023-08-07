@@ -7,3 +7,7 @@ exports.result = (req, res) => {
         res.send({result: "fail"})
     }
 };
+
+exports.aaa = (req, res) => {
+    res.render('activity1');
+};

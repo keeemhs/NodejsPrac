@@ -10,11 +10,6 @@ app.set('views', './views');
 const router = require('./routes/activity');
 app.use('/', router);
 
-//router
-app.get('/', (req, res) => {
-    res.render('activity1');
-});
-
 //server start
 app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
