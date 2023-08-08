@@ -12,7 +12,7 @@ app.use(express.json());
 const conn = mysql.createConnection({
     host: '127.0.0.1',
     user: 'keeemhs',
-    password: '',
+    password: 'gustmd0929!@',
     database: 'kdt9',
     port: 3306,
 });
@@ -41,7 +41,14 @@ app.get('/visitor', (req, res) => {
 });
 // GET /visitor/get 방명록 하나 조회
 app.get('/visitor/get', (req, res) => {
-    res.send('방명록 하나조회');
+    const query = `SELECT * FROM visitor WHERE id=${req.query.id}`;
+    conn.query(query, (err, rows) => {
+        if(err) {
+            console.log(err)
+            return;
+        }
+        res.render('visitor', {data: rows});
+    })
 });
 // POST /visitor/write 방명록 하나 생성
 app.post('/visitor/write', (req, res) => {
@@ -53,11 +60,28 @@ app.post('/visitor/write', (req, res) => {
 });
 // PATCH /visitor/edit 방명록 하나 수정
 app.patch('/visitor/edit', (req, res) => {
-    res.send('방명록 하나 수정')
+    const query = `UPDATE visitor SET name='${req.body.name}', comment='${req.body.comment}' WHERE id='${req.body.id}'`;
+    conn.query(query, (err, rows) => {
+        console.log('rows', rows);
+        if( err ) {
+            console.log(err);
+            res.send({ result: false });
+            return;
+        }
+        res.send({ result: true });
+    })
 });
 // DELETE /visitor/delete 방명록 하나 삭제
 app.delete('/visitor/delete', (req, res) => {
-    res.send('방명록 하나 삭제')
+    const query = `DELETE FROM visitor WHERE id=${req.body.id}`
+    conn.query(query, (err, rows) => {
+        if( err ) {
+            console.log(err);
+            res.send({ result: false });
+            return;
+        }
+        res.send({ result: true });
+    })
 });
 
 app.use*'*', (req, res) => {
