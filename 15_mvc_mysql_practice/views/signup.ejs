@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>SIGNUP</title>
+</head>
+<body>
+    <form name="signup-form">
+        <fieldset>
+            <legend>회원가입</legend>
+            이름 : <input type="text" id="name" placeholder="이름을 입력하세요" /><br />
+            아이디 : <input type="text" id="userid" placeholder="아이디 입력" /><br />
+            비밀번호 : <input type="password" id="pw" placeholder="비밀번호 입력" /><br />
+            <button type="button" onclick="signup()">회원가입</button>
+        </fieldset>
+    </form>
+
+    <script>
+        function signup() {
+            console.log('signup');
+            const form = document.forms['signup-form'];
+            axios({
+                method: 'POST',
+                url: '/signup',
+                data: {
+                    name: form.name.value,
+                    userid: form.userid.value,
+                    pw: form.pw.value
+                },
+            }).then(() => {
+                alert('회원가입을 축하합니다~~~')
+                link = 'signin';
+                location.replace(link);
+            })
+        }
+    </script>
+</body>
+</html>
