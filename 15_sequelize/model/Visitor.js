@@ -10,17 +10,16 @@ const mysql = require('mysql')
 const conn = mysql.createConnection({
     host: '127.0.0.1',
     user: 'keeemhs',
-    password: '***',
+    password: 'gustmd0929!@',
     database: 'kdt9',
     port: 3306,
 });
-
-conn.connect( (err) => {
-    if(err) {
+conn.connect((err) => {
+    if (err) {
         console.log(err);
         return;
     }
-    console.log('connect')
+    console.log('connect');
 });
 
 exports.getVisitors = (callback) => {
