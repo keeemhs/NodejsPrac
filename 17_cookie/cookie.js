@@ -35,7 +35,8 @@ app.get('/setCookie', (req, res) => {
     res.send('set cookie');
 })
 app.get('/getCookie', (req, res) => {
-    res.send(req.cookies);
+    // res.send(req.cookies);
+    res.send(req.signedCookies);
 })
 app.get('/clearCookie', (req, res) => {
     res.clearCookie('myCookie', 'myValue', cookieConfig);
