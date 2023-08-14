@@ -10,7 +10,7 @@ app.use(express.json());
 const secret = 'secretKey';
 
 app.get('/',(req,res)=>{
-    res.render('index')
+    res.render('index');
 });
 app.post('/login', (req, res) => {
     const { id, pw } = req.body;
