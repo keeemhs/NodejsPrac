@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <title>파일 업로드</title>
+    </head>
+    <body>
+        <h1>파일 업로드</h1>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" name="files" multiple /><br />
+            <button type="submit">업로드</button>
+        </form>
+
+        <div id="imageContainer"></div>
+        <!-- 이미지를 표시할 컨테이너 추가 -->
+
+        <script>
+            document.querySelector('#uploadForm').addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+
+                const response = await axios.post('/upload', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+
+                const imageContainer = document.querySelector('#imageContainer');
+                imageContainer.innerHTML = '';
+
+                response.data.files.forEach((file) => {
+                    // 이미지 엘리먼트를 생성하고 소스를 설정하여 이미지를 표시
+                    const img = document.createElement('img');
+                    img.src = `/uploads/${file.filename}`; // 서버에서 저장된 파일 경로로 설정
+                    img.alt = file.filename;
+                    img.classList.add('uploaded-image');
+                    imageContainer.appendChild(img);
+                });
+            });
+        </script>
+    </body>
+</html>
