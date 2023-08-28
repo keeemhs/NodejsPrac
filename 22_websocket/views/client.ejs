@@ -43,11 +43,6 @@
 
             ////////////////////////폼 이벤트////////////////////////
             chatForm.addEventListener('submit', (event) => {
-                // event.preventDefault();
-                // const msg = chatForm.querySelector('#message');
-                // socket.send(msg.value);
-                // msg.value = '';
-
                 event.preventDefault();
                 const userField = chatForm.querySelector('#user');
                 const msgField = chatForm.querySelector('#message');
@@ -57,6 +52,7 @@
                 if (message.trim() !== '') {
                     const messageToSend = `${user}: ${message}`;
                     socket.send(messageToSend);
+                    userField.value = '';
                     msgField.value = '';
                 }
             });
