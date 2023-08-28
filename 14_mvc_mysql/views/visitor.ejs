@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <title>Document</title>
     </head>
@@ -28,13 +28,13 @@
             </thead>
             <tbody>
                 <% for(let i = 0; i < data.length; i++) { %>
-                    <tr id="tr_<%= data[i].id %>">
-                        <td><a href="/visitor/get?id=<%= data[i].id%>"><%= data[i].id %></a></td>
-                        <td><%= data[i].name %></td>
-                        <td><%= data[i].comment %></td>
-                        <td><button type="button" onclick="editVisitor('<%= data[i].id%>')">수정</button></td>
-                        <td><button type="button" onclick="deleteVisitor('<%= data[i].id%>')">삭제</button></td>
-                    </tr>
+                <tr id="tr_<%= data[i].id %>">
+                    <td><a href="/visitor/get?id=<%= data[i].id%>"><%= data[i].id %></a></td>
+                    <td><%= data[i].name %></td>
+                    <td><%= data[i].comment %></td>
+                    <td><button type="button" onclick="editVisitor('<%= data[i].id%>')">수정</button></td>
+                    <td><button type="button" onclick="deleteVisitor('<%= data[i].id%>')">삭제</button></td>
+                </tr>
                 <% } %>
             </tbody>
         </table>
@@ -43,7 +43,7 @@
             const body = document.querySelector('tbody');
             function registerComment() {
                 console.log('register comment');
-                const form = document.forms['visitor-form']
+                const form = document.forms['visitor-form'];
                 axios({
                     method: 'POST',
                     url: '/visitor/write',
@@ -52,7 +52,7 @@
                         comment: form.comment.value,
                     },
                 }).then((res) => {
-                    console.log('res', res)
+                    console.log('res', res);
                     const html = `
                     <tr id=tr_${res.data.id}>
                         <td>${res.data.id}</td>
@@ -62,42 +62,42 @@
                         <td><button type="button">삭제</button></td>
                     </tr>`;
                     body.insertAdjacentHTML('beforeend', html);
-                })
+                });
             }
 
             function editVisitor(id) {
                 const form = document.forms['visitor-form'];
                 axios({
-                    method:'PATCH',
+                    method: 'PATCH',
                     url: '/visitor/edit',
                     data: {
                         id: Number(id),
                         name: form.name.value,
-                        comment: form.comment.value 
+                        comment: form.comment.value,
                     },
-                }).then( res => {
+                }).then((res) => {
                     console.log('res', res);
-                    if(res.data.result) {
+                    if (res.data.result) {
                         window.location.reload();
                     }
-                })
+                });
             }
 
             function deleteVisitor(id) {
-                if( !confirm('삭제하시겠습니까?' )) {
+                if (!confirm('삭제하시겠습니까?')) {
                     return;
                 }
                 axios({
-                    method: "DELETE",
+                    method: 'DELETE',
                     url: '/visitor/delete',
                     data: {
-                        id: Number(id)
+                        id: Number(id),
                     },
                 }).then((res) => {
-                    if( res.data.result ) {
+                    if (res.data.result) {
                         window.location.reload();
                     }
-                })
+                });
             }
         </script>
     </body>
