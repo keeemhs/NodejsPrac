@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- 클라이언트에서도 socket.io 사용가능 -->
+        <script src="/socket.io/socket.io.js"></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Hello World!</h1>
+        <button id="hello">hello</button>
+        <button id="study">study</button>
+        <button id="bye">bye</button>
+        <div id="output"></div>
+        <!-- Changed the div id to 'output' -->
+
+        <script>
+            const outputDiv = document.querySelector('#output');
+            const socket = io();
+
+            document.getElementById('hello').addEventListener('click', () => {
+                clearOutput();
+                socket.emit('print_hello', { msg: 'hello' });
+            });
+
+            document.getElementById('study').addEventListener('click', () => {
+                clearOutput();
+                socket.emit('print_study', { msg: 'study' });
+            });
+
+            document.getElementById('bye').addEventListener('click', () => {
+                clearOutput();
+                socket.emit('print_bye', { msg: 'bye' });
+            });
+
+            // backend 이벤트 받아오기
+            socket.on('back_hello', (data) => {
+                appendMessage(data.msg); // Access 'msg' property
+            });
+
+            socket.on('back_study', (data) => {
+                appendMessage(data.msg); // Access 'msg' property
+            });
+
+            socket.on('back_bye', (data) => {
+                appendMessage(data.msg); // Access 'msg' property
+            });
+
+            function clearOutput() {
+                outputDiv.innerHTML = ''; // Clear existing messages
+            }
+
+            function appendMessage(msg) {
+                const div = document.createElement('div');
+                div.textContent = msg;
+                outputDiv.appendChild(div);
+            }
+        </script>
+    </body>
+</html>
