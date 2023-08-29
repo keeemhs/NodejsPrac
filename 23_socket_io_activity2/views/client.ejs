@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- 클라이언트에서도 socket.io 사용가능 -->
+        <script src="/socket.io/socket.io.js"></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <div>Socket IO</div>
+        <ul></ul>
+        <form id="chat">
+            <input type="text" id="user" placeholder="사용자명" />
+            <input type="text" id="message" placeholder="채팅내용" /><br />
+            <button>채팅</button>
+        </form>
+
+        <script>
+            // chat 폼 가지고 오기
+            const chatForm = document.querySelector('#chat');
+            // ul 태그 가지고 오기
+            const ul = document.querySelector('ul');
+
+            const socket = io();
+            // 이벤트 생성 (socket.emit("원하는 이름 작성"), {  });
+            // 이벤트('open_message') 생성 후 값( { name: 'client', message: 'Hello Server' } ) 대입
+            socket.emit('open_message', { name: 'client', message: 'Hello Server' }, (res) => {
+                console.log(res);
+            });
+
+            // backend 이벤트 받아오기
+            socket.on('backend_message', (arg) => {
+                // li 태그 만들어주기
+                const li = document.createElement('li');
+                li.textContent = `${arg.name}: ${arg.message}`; // name과 message 그대로 가지고 옴
+                // 마무리로 ul태그에 집어 넣기
+                ul.appendChild(li);
+            });
+
+            // 폼 이벤트
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // user와 message 내용 가지고 오기
+                const user = chatForm.querySelector('#user');
+                const message = chatForm.querySelector('#message');
+
+                // form_message 이벤트 생성
+                socket.emit('form_message', { name: user.value, message: message.value });
+                // frontend에서 값을 사용하기 위해서 frontend에서 사용하기 위해서 backend에서 새로운 이벤트를 생성 후 받아오는 방법과
+                // callback을 사용하는 방법이 있다. (확장성이 떨어진다)
+
+                // 채팅 버튼 클릭 시 값 비워주기
+                user.value = '';
+                message.value = '';
+            });
+        </script>
+    </body>
+</html>
