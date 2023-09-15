@@ -34,11 +34,12 @@
         <title>Document</title>
     </head>
     <body>
-        <div id="chatDoc" style="width: 300px; height: 500px; background-color: skyblue; overflow-y: scroll"></div>
+        <div id="chatDoc" style="width: 350px; height: 500px; background-color: skyblue; overflow-y: scroll"></div>
         <form id="chat">
+            <select id="userList"></select>
             <input type="text" id="message" placeholder="채팅내용" style="width: 180px" />
             <button>채팅</button>
-            <button type="button" onclick="leave()">나가기</button>
+            <!-- <button type="button" onclick="leave()">나가기</button> -->
         </form>
 
         <script>

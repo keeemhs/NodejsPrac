@@ -29,7 +29,7 @@ io.on('connection', (socket) => {
         socket.room = res;
         console.log('조인 후', socket.rooms);
         // broadcast는 나를 제외한 전체사용자(브라우저)에게 메세지 전달
-        socket.broadcast.to(res).emit('create', '새로운 브라우저가 입장하였습니다.');
+        socket.broadcast.to(res).emit('create', `${socket.id}님이 입장하였습니다.`);
         // console.log(socket);
         const roomInfo = io.sockets.adapter.rooms.get(res)?.size;
         console.log(roomInfo);
